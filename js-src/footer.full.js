@@ -1,4 +1,4 @@
 	
-	return _tipzy;
+	return _deferredImg;
 		
 })(window, jQuery);
