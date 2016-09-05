@@ -29,7 +29,6 @@ i.e. :
 
 
 ### javascript things
-- used to create the tooltips, and toggle the `aria-hidden` attribute ... also to position them so they fit in the window, also to determine the arrow position ...
 - a few versions of the js are available ( both minified and unminified ): 
 	- `deferredImg.full.js` - this has all the required libraries built in ( except jquery of course )
 	- `deferredImg.amd.js` - define style for like require.js
