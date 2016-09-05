@@ -1,13 +1,13 @@
 /**
 * deferredImg
 * v1.0.0
-* 2016-09-05 12:37:52 PM 
+* 2016-09-05 12:57:41 PM 
 */ 
 
 /**
 * this is really just a wrap to contain the other required libraries
 */
-var _tipzy = (function(W, $) {
+var _deferredImg = (function(_w, $) {
 	
 	
 if(!jQuery().inView){
@@ -217,6 +217,6 @@ var _deferredImg = (function(_w, $) {
 		
 })(window, jQuery || $);
 	
-	return _tipzy;
+	return _deferredImg;
 		
 })(window, jQuery);

@@ -1,13 +1,13 @@
 /**
 * deferredImg
 * v1.0.0
-* 2016-09-05 12:37:52 PM 
+* 2016-09-05 12:57:41 PM 
 */ 
 
 /**
 * amd stylez
 */
-define('_tipzy', ['jQuery'], function($) { 
+define('_deferredImg', ['jQuery'], function($) { 
 	
 	
 if(!jQuery().inView){
@@ -133,6 +133,6 @@ var _deferredImg = (function(_w, $) {
 		
 })(window, jQuery || $);
         
-        return _tipzy;
+        return _deferredImg;
         
 });
