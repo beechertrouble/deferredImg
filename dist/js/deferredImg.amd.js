@@ -1,7 +1,7 @@
 /**
 * deferredImg
 * v1.0.0
-* 2016-09-05 12:57:41 PM 
+* 2016-09-06 11:16:05 AM 
 */ 
 
 /**
@@ -39,7 +39,7 @@ if(!jQuery().inView){
 * jQuery 
 * inView
 */
-var _deferredImg = (function(_w, $) {
+var _deferredImg = (function($) {
 
 	'use strict';
 			
@@ -48,16 +48,17 @@ var _deferredImg = (function(_w, $) {
 		var _pub = {},
 			selector,
 			origin = {},
-			callbacks = {},
-			bind
+			callbacks = {}
 			;
 		
-		_pub.doCallback = function(event) {
+		_pub.doCallback = function(event, pass) {
 								
 			var func = callbacks[event];
+			
+			pass = pass !== undefined ? pass : { pub : _pub };
 				
-			if(func !== undefined && typeof callbacks[event] == 'function')
-				func();
+			if(func !== undefined && typeof callbacks[event] === 'function')
+				func(pass);
 				
 		};
 		
@@ -79,10 +80,17 @@ var _deferredImg = (function(_w, $) {
 			};
 			
 			_pub.args = args;
+														
+			_pub.doCallback('init', {
+					pub : _pub, 
+					args : args
+				});
 			
 			_pub.load();
-											
-			_pub.doCallback('init');
+			
+			if(typeof endedEvents === 'object') endedEvents.init();
+			
+			$(window).on('scrollStopped resizeStopped', function(e){ _pub.load(); });
 					
 		};
 		
@@ -103,13 +111,24 @@ var _deferredImg = (function(_w, $) {
 				
 				var markup = _pub.getNoscriptMarkup(target);
 				
+				target.data('noscript', markup);
+				
+				_pub.doCallback('loading', {
+					pub : _pub,
+					target : target,
+					markup : markup
+				});
+				
 				// remove noscript
-				// markup.attr('alt', '');
 				target.find('noscript').remove();
 				
 				markup.one('load', function(e){
 					target.removeClass('_deferredImg_loading').addClass('_deferredImg_loaded');
-					_pub.doCallback('loaded');
+					_pub.doCallback('loaded', {
+						pub : _pub,
+						target : target,
+						markup : markup
+					});
 				});
 				
 				target.prepend(markup);
@@ -120,8 +139,7 @@ var _deferredImg = (function(_w, $) {
 		
 		_pub.getNoscriptMarkup = function(target) {
 			
-			var noscript = target.find('noscript').text();
-			return $(noscript);
+			return target.data('noscript') !== undefined ? target.data('noscript') : $(target.find('noscript').text());
 			
 		};	
 				
@@ -131,7 +149,7 @@ var _deferredImg = (function(_w, $) {
 	
 	return _deferredImg;
 		
-})(window, jQuery || $);
+})(jQuery || $);
         
         return _deferredImg;
         

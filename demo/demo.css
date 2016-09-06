@@ -87,18 +87,12 @@ h1 {
 
 .main_wrap {
 	min-height: 100vh;
-	padding-bottom: 3em;
+	max-width: 960px;
+	margin: 0 auto;
+	padding: 2em 1em 3em;
 }
 
-._tipzy_anchor {
-	color: #eee;
-	background: #333;
-	display: inline-block;
-	padding: 0 4px;
+.main_wrap > * {
+	margin-bottom: 1em;
 }
 
-#demo_bottom {
-	position: absolute;
-	bottom: 0;
-	left: 0;
-}
